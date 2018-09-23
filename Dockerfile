@@ -10,4 +10,4 @@ RUN npm install
 
 CMD ["node","/app/bin/www"]
 
-EXPOSE 3000
+EXPOSE 80

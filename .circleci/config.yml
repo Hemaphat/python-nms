@@ -27,6 +27,18 @@ jobs:
             docker build -t hemaphat/devops-node:${CIRCLE_SHA1} . &&
             docker push hemaphat/devops-node:latest &&
             docker push hemaphat/devops-node:${CIRCLE_SHA1}
+      - run:
+          name: "Deploy in rancher"
+          command: |
+            docker run --rm -it \
+              -e CATTLE_ACCESS_KEY="$ACCESS_KEY" \
+              -e CATTLE_SECRET_KEY="$SECRET_KEY" \
+              -e CATTLE_URL="$CATTLE_URL" \
+              etlweather/gaucho upgrade $RANCHER_ID \
+              --imageUuid 'docker:hemaphat/devops-node:latest' \
+              --batch_size 3 --start_first \
+              --auto_complete --timeout 600 \
+              \
       - run: 
           name: "End of job."
           command:
