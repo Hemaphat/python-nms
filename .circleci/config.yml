@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+     docker:
+      - image: circleci/node:9.11.1-stretch
+     working_directory: ~/repo
+     step:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-json" }}
+            - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          path:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: echo Done
