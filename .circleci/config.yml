@@ -23,10 +23,10 @@ jobs:
       - run:
           name: "Build docker and push to docker hub."
           command:
-            docker build -t hemaphat/devops-node:latest .\n
-            docker build -t hemaphat/devops-node:${CIRCLE_SHA1} .\n
-            docker push hemaphat/devops-node:latest\n
-            docker push hemaphat/devops-node:${CIRCLE_SHA1}\n
+            docker build -t hemaphat/devops-node:latest . && 
+            docker build -t hemaphat/devops-node:${CIRCLE_SHA1} . &&
+            docker push hemaphat/devops-node:latest &&
+            docker push hemaphat/devops-node:${CIRCLE_SHA1}
       - run: 
           name: "End of job."
           command:
