@@ -1,10 +1,10 @@
 version: 2
 jobs:
   build:
-     docker:
+    docker:
       - image: circleci/node:9.11.1-stretch
-     working_directory: ~/repo
-     step:
+    working_directory: ~/repo
+    step:
       - checkout
       - restore_cache:
           keys:
